@@ -1,18 +1,37 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-contact-pick';
+import { StyleSheet, View, Text, TouchableOpacity, PermissionsAndroid, Platform } from 'react-native';
+import { ERROR_CODES, pickContact } from 'react-native-contact-pick';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+  const onPress = React.useCallback(async () => {
+    try {
+      const granted =
+        Platform.OS === 'android'
+          ? (await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.READ_CONTACTS
+            )) === PermissionsAndroid.RESULTS.GRANTED
+          : true;
+      if (granted) {
+        const res = await pickContact();
+        console.log(11, res)
+        // do some stuff
+      }
+    } catch (error) {
+      console.log(99,error);
+      
+      if (error.code === ERROR_CODES.ERR_CODE_CANCELED) {
+        // canceled
+      }
+    }
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Text>Select contact</Text>
+      </TouchableOpacity>
     </View>
   );
 }
