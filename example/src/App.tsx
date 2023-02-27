@@ -14,18 +14,20 @@ export default function App() {
   const onPress = React.useCallback(async () => {
     try {
       const granted =
-        Platform.OS === 'android'
+        Platform.OS === 'android' &&
+        PermissionsAndroid.PERMISSIONS.READ_CONTACTS
           ? (await PermissionsAndroid.request(
               PermissionsAndroid.PERMISSIONS.READ_CONTACTS
             )) === PermissionsAndroid.RESULTS.GRANTED
           : true;
       if (granted) {
+        // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const res = await pickContact();
         // do some stuff
       }
-    } catch (error) {
-      if (error.code === ERROR_CODES.ERR_CODE_CANCELED) {
+    } catch (error: any) {
+      if (error?.code === ERROR_CODES.ERR_CODE_CANCELED) {
         // canceled
       }
     }
