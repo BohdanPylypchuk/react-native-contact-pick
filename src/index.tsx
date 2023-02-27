@@ -1,5 +1,9 @@
 import { NativeModules, Platform } from 'react-native';
-import type { PickContactErrors, PickContactOptions, PickContactResult } from './types';
+import type {
+  PickContactErrors,
+  PickContactOptions,
+  PickContactResult,
+} from './types';
 
 const LINKING_ERROR =
   `The package 'react-native-contact-pick' doesn't seem to be linked. Make sure: \n\n` +
@@ -18,10 +22,10 @@ const ContactPick = NativeModules.ContactPick
       }
     );
 
-    export const ERROR_CODES: PickContactErrors = ContactPick.getConstants();
+export const ERROR_CODES: PickContactErrors = ContactPick.getConstants();
 
-    export function pickContact(
-      options: PickContactOptions = {}
-    ): Promise<PickContactResult> {
-      return ContactPick.pickContact(options);
-    }
+export function pickContact(
+  options: PickContactOptions = {}
+): Promise<PickContactResult> {
+  return ContactPick.pickContact(options);
+}
