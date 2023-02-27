@@ -20,12 +20,11 @@ export default function App() {
             )) === PermissionsAndroid.RESULTS.GRANTED
           : true;
       if (granted) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const res = await pickContact();
-        console.log(11, res);
         // do some stuff
       }
     } catch (error) {
-      console.log(99, error);
       if (error.code === ERROR_CODES.ERR_CODE_CANCELED) {
         // canceled
       }
