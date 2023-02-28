@@ -49,11 +49,8 @@ class ContactPick: NSObject, CNContactPickerDelegate {
     contactInfo["fullName"] = fullName ?? ""
       
     let phoneNumbers = getPhoneNumbers(from: contact)
-    contactInfo["phoneNumbers"] = phoneNumbers.count > 1 ? phoneNumbers : NSNull()
-  
     let emails = getEmails(from: contact)
-    contactInfo["emails"] = emails.count > 1 ? emails : NSNull()
-      
+    contactInfo["emails"] = emails.count > 0 ? emails : NSNull()
       
     self.promise.resolve!(contactInfo)
   }
