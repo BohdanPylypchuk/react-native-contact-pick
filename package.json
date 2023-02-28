@@ -1,6 +1,6 @@
 {
   "name": "react-native-contact-pick",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "react-native-contact-pick is a simple and easy-to-use library that provides a way to access the device's contacts and allows users to select one or more contacts from their address book",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
